@@ -4,7 +4,7 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false # Caso algum teste falhe os proximos serao executados
+      fail-fast: false
       matrix:
         containers: [1]
     steps:
@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Cypress
         run: npm install -g cypress
+      - name: Add Cypress to PATH
+        run: export PATH=$(npm bin):$PATH
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
