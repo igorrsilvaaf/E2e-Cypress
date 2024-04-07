@@ -1,0 +1,21 @@
+name: End-To-End Cypress Test
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # Caso algum teste falhe os proximos serao executados
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000' 
+          record: true
+          parallel: true 
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
