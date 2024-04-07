@@ -1,2 +1,2 @@
 import './commands'
-import 'mailosaur'
+import 'cypress-mailosaur'
